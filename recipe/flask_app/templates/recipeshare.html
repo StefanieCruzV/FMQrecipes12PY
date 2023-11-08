@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+        crossorigin="anonymous"
+      />
+    <title>Document</title>
+</head>
+<body>
+   <h1>WELCOME, {{loged_user.first_name}}</h1>
+   <a class="text-decoration-none my-3 p-3  " href="/create">Create</a>
+   <a class="text-decoration-none my-3 p-3  " href="/logout">Logout</a>
+   <div class="mx-auto d-block my-3 p-3 border ">
+    <table class="table">
+      <h1 class="text-center">All posted recipes:</h1>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Posted by</th>
+          <th scope="col">Recipe name</th>
+          <th scope="col">Under 30 min</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for recipe in recipes %}
+        <tr>
+          <td>{{recipe.first_name}} {{recipe.last_name}}</td>
+          <td>{{recipe.description}}</td>
+          <td>{{recipe.time}}</td>
+          <td>{{recipe.instructions}}</td>
+          <td>{{recipe.date}}</td>
+          <td>
+
+            {% if session['logged_id']== recipe.id  %}
+            <a class="text-primary text-decoration-none badge badge-info" href="/update_recipe/{{recipe.id_recipe}}">Edit</a>
+            <a class="text-primary text-decoration-none badge badge-info" href="/delete_recipe/{{recipe.id_recipe}}">Delete</a>
+            {% endif %}  
+            <a  class="text-primary text-decoration-none badge badge-info" href="/show_recipe/{{recipe.id_recipe}}">View Recipe</a>
+           
+          </td>
+          <td>
+    
+          </td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+
+</body>
+</html>
